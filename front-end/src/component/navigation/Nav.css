@@ -1,0 +1,73 @@
+.navigations,
+.navigation,
+.users {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.navigation-container {
+    background-color: #292929;
+    color: white;
+    z-index: 88888;
+    position: absolute;
+    width: 100%;
+}
+
+.navigation {
+    justify-content: space-between;
+    margin: 0 2rem;
+}
+
+.navigations li,
+.users li {
+    margin: 0 2rem;
+}
+
+.navigations li a,
+.logo a,
+.users li a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo a{
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navigations li a:active {
+    font-weight: 900;
+}
+
+.users li {
+    font-weight: 900;
+}
+
+.noDisplay {
+    display: none;
+}
+
+.display {
+    display: block;
+}
+
+.logout {
+    font-weight: 900;
+    cursor: "pointer";
+}
+
+.filter-text-insert {
+    padding: .2rem;
+    font-size: 1rem;
+    outline: none;
+    border-radius: .2rem;
+    border-color: transparent;
+    width: 20vw;
+}
+
+.navigators-div{
+    display: flex;
+    margin-left: 5rem;
+}
+
