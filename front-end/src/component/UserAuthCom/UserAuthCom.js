@@ -28,6 +28,8 @@ export default function UserAuthCom({inputRendering, identification}) {
             if(window.location.pathname === "/login"){
                 localStorage.setItem("id", toBackend.data.data.id)
                 localStorage.setItem("role", toBackend.data.data.role)
+                localStorage.setItem("name", toBackend.data.data.name)
+                localStorage.setItem("email", toBackend.data.data.email)
                 window.location.assign('/');
             }
         }else{
@@ -51,6 +53,7 @@ export default function UserAuthCom({inputRendering, identification}) {
         }
     }
 
+    const path = window.location.pathname.split("/");
     return (
         <div className='wrapper-div' >
             <section className='wrapper'>
@@ -62,7 +65,7 @@ export default function UserAuthCom({inputRendering, identification}) {
                             {inputRendering.map((input) => (
                                 <label className={input + "-label"} key={input}>
                                     <span>{input}</span>
-                                    <input accept={input === "image" ? "image/*" : "" } onChange={(e) => dataStoreFunc(e.target.value, input)} type={input === "password" ? "password" : (input === "email") ? "email" : (input === "passwordConfirm") ? "password" : (input === "price") ? "number" : "text" } id={input + "-fillup"} />
+                                    <input  accept={input === "image" ? "image/*" : "" } onChange={(e) => dataStoreFunc(e.target.value, input)} type={input === "password" ? "password" : (input === "email") ? "email" : (input === "passwordConfirm") ? "password" : (input === "price") ? "number" : "text" } id={input + "-fillup"} />
                                 </label>
                              ))}
                             <button type="submit" onClick={(e) => sendDataToBackend(e)}> {(window.location.pathname === '/login') ? "Login" : (window.location.pathname === '/signup') ? "Signup" : "Upload"} </button>

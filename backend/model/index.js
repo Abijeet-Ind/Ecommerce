@@ -36,6 +36,7 @@ db.products = require('./models/productModel')(sequelize, DataTypes);
 db.users = require('./models/userModel')(sequelize, DataTypes);
 db.carts = require('./models/addToCart')(sequelize, DataTypes);
 db.favs = require('./models/fav')(sequelize, DataTypes);
+db.boughts = require("./models/boughtItem")(sequelize, DataTypes);
 
 // relation
 db.users.hasMany(db.products);

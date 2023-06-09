@@ -22,6 +22,7 @@ export default function Nav() {
               <div className="navigators-div">
                 <li className='navigators'> <Link to={"/"}   style={{fontSize: "1.2rem", fontWeight: "500"}}> Home </ Link></li>
                 <li className='navigators' style={{display: localStorage.getItem("role") === "admin" ? "block" : "none"}}> <Link to={"/create"} style={{fontSize: "1.2rem", fontWeight: "500"}} > Upload product </ Link></li>
+                <li className='navigators' style={{display: localStorage.getItem("role") === "admin" ? "block" : "none"}}> <Link to={"/orders"} style={{fontSize: "1.2rem", fontWeight: "500"}} > Orders </ Link></li>
                 <li className='navigators'> <Link to={"/cart"} style={{fontSize: "1.2rem", fontWeight: "500"}} > Cart </ Link></li>
                 <li className='navigators'> <Link to={"/favourite"} style={{fontSize: "1.2rem", fontWeight: "500"}} > Favourite </ Link></li>
               </div>

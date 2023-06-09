@@ -11,9 +11,12 @@ router.post("/favorite", productController.favorite);
 
 router.get('/all', productController.dispayAll)
 router.get('/one/:slug', productController.findone)
+router.get('/vieworder', productController.viewOrder)
 
 router.post("/cart", productController.displayCart);
 router.post("/favourite", productController.displayFav);
+router.post("/order", productController.ordered);
+
 
 router.get("/search/:item", productController.searchItem);
 

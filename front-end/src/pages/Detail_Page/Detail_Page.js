@@ -2,15 +2,19 @@ import "./Detail_Page.css"
 import image from "./../../assets/tshirt.png"
 import { useEffect, useState } from "react"
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Detail_Page() {
     const [data, setData] = useState(null);
+    const [buyTrigger, setBuyTrigger] = useState(null);
+    
+
     const baseUrl = "http://127.0.0.1:8000/api/v1/products"
     const base = "http://127.0.0.1:8000";
     const fetchData = async() => {
         const fetched = await axios.get(`${baseUrl}/one/${window.location.pathname.split("/")[2]}`);
         setData(fetched.data.message)
-        console.log(fetched.data.message)
+        // console.log(fetched.data.message)
     }
 
     useEffect(() => {
@@ -40,6 +44,39 @@ export default function Detail_Page() {
             alert("uploaded to cart");
         }
     }
+    const [open, setOpen] = useState(false)
+
+    const close = (e) => {
+        e.preventDefault();
+        setOpen(false);   
+    }
+
+    const submitCode = async (e) => {
+        e.preventDefault()
+        
+        const data = await axios({
+            method: "POST",
+            url: "http://127.0.0.1:8000/api/v1/products/order",
+            data: {
+                userid: localStorage.getItem("id"),
+                id: localStorage.getItem("key"),
+                address: document.getElementById("address").value,
+                area: document.getElementById("area-desc").value,
+            }
+        })
+        console.log(data)
+    }
+
+    const buyClick = (productId) => {
+        console.log(productId)
+        if(!(localStorage.getItem("id"))){
+            alert("please login");
+        }else{
+            localStorage.setItem("key", productId)
+            setOpen(!open)
+        }
+    }
+
   return (
     <div className="detail-container">
         {data && 
@@ -63,16 +100,15 @@ export default function Detail_Page() {
                     </div>
 
                     <div>
-                        <span>{data.description} </span>
+                        <span>{data.description}  </span>
                     </div>
 
                     <div className="buttons">
-                        <button className="buy" onClick={el =>  
-                            localStorage.getItem("id") 
-                                ? alert("boght") 
-                                : alert("please login")}
-                            > BUY 
-                        </button>
+                        {/* <Link to={`buy`}>productPrice */}
+                            <button className="buy" onClick={() => buyClick(data.id)}
+                                > BUY 
+                            </button>
+                        {/* </Link> */}
                         <button className="cart" onClick={el => 
                             localStorage.getItem("id") 
                                 ? addToCart(data.id, localStorage.getItem("id")) 
@@ -81,7 +117,43 @@ export default function Detail_Page() {
                         </button>
                     </div>
                 </div>
+
+
+             {open && 
+            <div className="order-container">
+                    <h1 className="close" onClick={ e => close(e)}>X</h1>
+                    <h1>Order Page</h1>
+                    <form onSubmit={e => submitCode(e)}>
+                        <label>
+                            <span>Name</span>
+                            <input type="text" name="" id="name" value={data.product} />
+                        </label>
+
+                        <label>
+                            <span>Email</span>
+                            <input type="email" name="" id="email" value={localStorage.getItem("email")} />
+                        </label>
+
+                        <label>
+                            <span>Price</span>
+                            <input type="number" name="" id="price" value={data.productPrice} />
+                        </label>
+
+                        <label>
+                            <span>Address</span>
+                            <input type="text" name="" id="address" />
+                        </label>
+
+                        <label>
+                            <span>Area Description</span>
+                            <textarea id="area-desc"/>
+                        </label>
+
+                        <button type="submit" >order</button>
+                    </form>
+                </div>}
             </div>
+
         }
 
     </div>

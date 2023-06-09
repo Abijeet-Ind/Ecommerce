@@ -53,3 +53,46 @@
     padding: 0rem 1rem;
     background-color: orange;
 }
+
+
+.order-container form, .order-container form label{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 1.3rem;
+}
+
+.order-container form label{
+    margin: 1.3rem 0;
+}
+
+.order-container{
+    margin-top: 15rem;
+    background: #757474;
+    padding: 4rem;
+    border-radius: .8rem;
+    color: white;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+}
+
+#name, #address, #number, #price, #email, textarea{
+    outline: none;
+    border-color: transparent;
+    border-bottom-color: #323232;
+    background: transparent;
+    color: white;
+    width: 30em;
+    font-size: 1.2rem;
+    margin-top: .8rem;
+}
+
+.close{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    cursor: default;
+}

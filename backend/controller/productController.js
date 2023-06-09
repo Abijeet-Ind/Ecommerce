@@ -2,6 +2,8 @@ const db = require("./../model/index");
 const productModel = db.products;
 const cartAdd = db.carts;
 const favorite = db.favs;
+const bought = db.boughts;
+
 const multer = require("multer");
 
 const statusFuction = (res, status, message) => {
@@ -29,6 +31,7 @@ const upload = multer({
 
 
 exports.createProduct = async (req, res) => {
+    // console.log(req.file)
     const product = await productModel.create({
         product: req.body.name,
         productPrice: req.body.price,
@@ -123,4 +126,23 @@ exports.searchItem = async(req, res) => {
     }})
 
     statusFuction(res, "success", searchItem);
+}
+
+
+
+exports.ordered = async (req, res) => {
+    console.log(req.body)
+    const orderedItem = await bought.create({
+        userId: req.body.userid,
+        address: req.body.address,
+        productId: req.body.id,
+        areaDescription: req.body.area
+    })
+
+    statusFuction(res, "success", "ordered")
+}
+
+exports.viewOrder = async(req, res) => {
+    const orderList = await bought.findAll({});
+    statusFuction(res, "success", orderList);
 }

@@ -13,12 +13,13 @@ import Detail from './pages/Detail_Page/Detail_Page';
 import Upload from './component/upload/Upload'
 import Fav_Cart from './pages/fav_&_cart/Fav_Cart';
 import Search from './pages/Search/Search'
+import Orders from './pages/orders/Orders';
 
 function App() {
   const [loginInput, setLoginInput] = useState(['email', 'password']);
   const [signupInput, setsignupInput] = useState(['name', 'email', 'password', 'passwordConfirm']);
   const [todoInput, setTodoInput] = useState(['name', 'description', 'price', 'category', 'brand'])
-
+  const [buyInputs, setBuyInput] = useState(["name", "address"]);
 
   return (
     <div className="App">
@@ -33,7 +34,9 @@ function App() {
           <Route path='/create' element={<Upload />}></Route>
           <Route path='/cart' element={<Fav_Cart pageName={"Cart"} />}></Route>
           <Route path='/favourite' element={<Fav_Cart pageName={"Favourite"} />}></Route>
+          <Route path='/orders' element={<Orders />}></Route>
           <Route path='/detail/:product' element={< Detail/>}></Route>
+          <Route path='/detail/:product/buy' element={<UserAuthCom inputRendering= {buyInputs} identification="Order Details"/>}></Route>
           <Route path='/search/:product' element={< Search/>}></Route>
           
         </Routes>
