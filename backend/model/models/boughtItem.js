@@ -13,6 +13,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         areaDescription:{
             type:Sequelize.STRING
+        },
+        isOrderSend:{
+            type:Sequelize.STRING
         }
     })
     return bought;

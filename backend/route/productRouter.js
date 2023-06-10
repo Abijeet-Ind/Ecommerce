@@ -19,5 +19,6 @@ router.post("/order", productController.ordered);
 
 
 router.get("/search/:item", productController.searchItem);
+router.post("/sendOrder", productController.orderSend)
 
 module.exports = router;

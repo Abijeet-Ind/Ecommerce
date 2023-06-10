@@ -3,6 +3,7 @@ const productModel = db.products;
 const cartAdd = db.carts;
 const favorite = db.favs;
 const bought = db.boughts;
+const user = db.users;
 
 const multer = require("multer");
 
@@ -136,13 +137,52 @@ exports.ordered = async (req, res) => {
         userId: req.body.userid,
         address: req.body.address,
         productId: req.body.id,
-        areaDescription: req.body.area
+        areaDescription: req.body.area,
+        isOrderSend: "0"
     })
 
     statusFuction(res, "success", "ordered")
 }
 
 exports.viewOrder = async(req, res) => {
+    const items = [];
+    const users = [];
+
     const orderList = await bought.findAll({});
-    statusFuction(res, "success", orderList);
+    
+    for (let i = 0; i < orderList.length; i++) {
+        const orders = await productModel.findAll({
+            where:{
+                id: orderList[i].productId
+            }
+        })
+        items.push(orders);
+    }
+    
+
+    for (let i = 0; i < orderList.length; i++) {
+        const userOrder = await user.findAll({
+            where:{
+                id: orderList[i].id
+            }
+        })
+        users.push(userOrder);
+    }
+        
+
+    res.status(200).json({
+        status: "success",
+        message: items,
+        user: users
+    })
+    // statusFuction(res, "success", items);
+}
+
+exports.orderSend = async(req, res) => {
+    console.log(req.body)
+    const sendedOrder = await findOne({where:{
+        isOrderSend: req.body.updateID
+    }})
+    sendedOrder.id = "1";
+    statusFuction(res, "success", "udpated to send order");
 }

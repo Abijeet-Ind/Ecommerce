@@ -126,27 +126,27 @@ export default function Detail_Page() {
                     <form onSubmit={e => submitCode(e)}>
                         <label>
                             <span>Name</span>
-                            <input type="text" name="" id="name" value={data.product} />
+                            <input type="text" name="" id="name-detail" value={data.product} />
                         </label>
 
                         <label>
                             <span>Email</span>
-                            <input type="email" name="" id="email" value={localStorage.getItem("email")} />
+                            <input type="email" name="" id="email-detail" value={localStorage.getItem("email")} />
                         </label>
 
                         <label>
                             <span>Price</span>
-                            <input type="number" name="" id="price" value={data.productPrice} />
+                            <input type="number" name="" id="price-detail" value={data.productPrice} />
                         </label>
 
                         <label>
                             <span>Address</span>
-                            <input type="text" name="" id="address" />
+                            <input type="text" name="" id="address-detail" />
                         </label>
 
                         <label>
                             <span>Area Description</span>
-                            <textarea id="area-desc"/>
+                            <textarea id="area-desc-detail"/>
                         </label>
 
                         <button type="submit" >order</button>
